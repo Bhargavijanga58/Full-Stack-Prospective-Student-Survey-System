@@ -1,0 +1,38 @@
+<div class="table-responsive">
+    <table class="table-bordered table-hover border-secondary">
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Date Of Survey</th>
+                <th>Likes</th>
+                <th>Sources</th>
+                <th>Recommend</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="table-dark" *ngFor="let survey of surveys">
+                <td>{{survey.num}}</td>
+                <td>{{survey.firstName}}</td>
+                <td>{{survey.lastName}}</td>
+                <td>{{survey.address}}</td>
+                <td>{{survey.city}}</td>
+                <td>{{survey.state}}</td>
+                <td>{{survey.zip}}</td>
+                <td>{{survey.mobile}}</td>
+                <td>{{survey.email}}</td>
+                <td>{{survey.dateOfSurvey}}</td>
+                <td>{{survey.likes}}</td>
+                <td>{{survey.sources}}</td>
+                <td>{{survey.recommendation}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

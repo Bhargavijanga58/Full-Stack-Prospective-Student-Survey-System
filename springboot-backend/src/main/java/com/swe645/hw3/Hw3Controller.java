@@ -14,18 +14,12 @@ public class Hw3Controller {
 	
 	@Autowired
 	public Hw3Repository hw3r;
-	
-	//get endpoint
 	@GetMapping("/getAllSurveys")
 	public List<Hw3Model> getAllSurveys() {
 		return hw3r.findAll();
 	}
-	
-	//creating post endpoint by using PostMapping
-	
 	@PostMapping("/submitSurvey")
 	public void submitSurvey(@RequestBody Hw3Model model) {
 		hw3r.save(model);
-	}
-		
+	}		
 }
