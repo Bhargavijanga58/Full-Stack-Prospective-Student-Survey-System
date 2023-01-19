@@ -1,5 +1,3 @@
-# hw3
-
 AWS RDS database creation : 
 1) Log in to the AWS Management Console and select RDS from the list of AWS Services Click on the Launch a DB Instance button. 
 2) On the create database page, choose standard create and click the MySQL radio button.
@@ -16,8 +14,6 @@ AWS RDS database creation :
 12) Click on the Edit button at the bottom of the page under the Inbound tab (as shown above). You will be presented with a dialog window to edit the rules for accessing the database. We will not concern ourselves with security since this is purely for illustrative purposes. As such, we will be opening up our RDS to all types of traffic, on all protocols, on all ports, from any IP address. Use the drop down menus to accomplish this. The modified access rules should look like the following picture when entered. Click Save when you are done. 
 13) At this point you have successfully set up a MySQL RDS for remote use through AWS. The next section will involve accessing the RDS through MYSQL WORKBENCH.
 14) After it is active, we can find it as below
-
-
 
 
 Angular Installation
@@ -38,15 +34,12 @@ vi)ng generate component all surveys or ng g c all surveys
 8)Run “ng serve” for executing the application. You can access your app which is loaded at http://localhost:4200/ 
 9)The app will automatically reload if any changes made in the source files. 
 10)Will be making changes to angular in further steps
+
 Creating backend SpringBoot application :
-
 1)To create a spring boot application go to https://start.spring.io/ fill all the details as mentioned below.
-
-
 2)Click on generate and a zip file of the project is downloaded. You can extract and import that project folder as maven project in eclipse.
 3)Once the project is created, we go into the SpringBootApplication.java which is in the source folder.
-We find that the main class is annotated with @SpringBootApplication. Create the following packages in the main folder: Application , Controller, Model, Repository as follow:
-
+We find that the main class is annotated with @SpringBootApplication. Create the following packages in the main folder: Application , Controller, Model, Repository and wirte the code accordingly.
 i)Application : Inside the application package, we created a new application class Hw3Applicatioon.java, here we declare the required fields of the form.
 
 ii)Controller:  A new class named Student Resource is created in this file and it serves as a controller. We begin by adding the annotation @RestController. The POST method (submit Survey) is created so that the Student object can be saved to the database. The Student Repository is able to carry out this. The JPA Repository's built-in save() function requires that a Student object be sent as an argument. We created a GET method to pull student records from the database. We utilized SpringDataJPA's getAllSurveys() function for this. We get a list of items using this.
@@ -54,20 +47,13 @@ ii)Controller:  A new class named Student Resource is created in this file and i
 iii)Model: As Students being my model class, it is annotated with @Entity. We have also annotated @Table and given the name is all_survey. we add the annotation @Id as email is our primary key. 
 
 iv)Repository: This interface extends the JPA Repository interface, where we supply the model name as Model and the string datatype of our private key - email. 
+
 4)In the application.properties file which is located in the resources folder. We write the code to connect to our aws rds database to establish connection. Here, we add all the properties related to data sources and the hibernate configuration.
-
-
-
 5)To generate jar file inside target folder, we have to Right click maven project, choose Run As-> Maven Build, Type package in the Goals box. Click Run. 
-
-
-
 6)Once the jar file is created under target folder, we run HW3Application.java on the server as java application. The output should be seen as the tomcat is initialized on 8080 port in the console output as mentioned below screenshot.
-
 
 Mysql Workbench to connect to Amazon RDS MySQL DB
 1)We need to provide the amazon RDS Mysql endpoint in place of hostname mentioned in the RDS databases connectivity and security tab. We have the following endpoint swe645hw3.c67eot0qbxge.us-east-1.rds.amazonaws.com in order to connect to MySql server hosted on amazon as mentioned below.
-
 2)Once we connect, we can find the AWS RDS in our My SQL workbench along with the table.
 
 
@@ -75,9 +61,6 @@ Mysql Workbench to connect to Amazon RDS MySQL DB
 Docker image creation for angular and springboot:
 1)We need to create a DockerHub account and the repository for angular.
 2)Create dockerfile in our angular folder 
-
-
-
 3)Let us create our docker image in the aws ec2 instance.
 4)Create AWS ec2 instance and install docker then establish the connection to the instance.
 5)To build an image of angular, run: docker build -t angularfinal:01 .
@@ -85,16 +68,12 @@ Docker image creation for angular and springboot:
 7)Let’s tag the image with our username: docker tag angularfinal:01 bhargavi645/angularfinal:01
 8)Run this to get the container id and its information: docker ps -a
 9)Then push the image to dockerhub, first login into your docker and then: docker push bhargavi645/angularfinal:01
-
-
-7)Let’s create dockerfile from the jar file of the springboot application
-
-
-10)In order to build an image of springboot: docker build -t hw3_finalspringboot:01 .
-11)Let’s run our image: docker run --rm -d -p 8080:8080 hw3_finalspringboot:01
-12)Let’s tag the image with our username: docker tag hw3_finalspringboot bhargavi645/ hw3_finalspringboot:01
-13)Run this to get the container id and its information: docker ps -a
-14)Then push the image to dockerhub, first login into your docker and then: docker push bhargavi645/ hw3_finalspringboot:01
+10)Let’s create dockerfile from the jar file of the springboot application
+11)In order to build an image of springboot: docker build -t hw3_finalspringboot:01 .
+12)Let’s run our image: docker run --rm -d -p 8080:8080 hw3_finalspringboot:01
+13)Let’s tag the image with our username: docker tag hw3_finalspringboot bhargavi645/ hw3_finalspringboot:01
+14)Run this to get the container id and its information: docker ps -a
+15)Then push the image to dockerhub, first login into your docker and then: docker push bhargavi645/ hw3_finalspringboot:01
 
 AWS EC2 instance creation:
 1.Log in to the AWS console https://aws.amazon.com/ and create an account. You will need to have a credit card. You can also use an AWS Educate but it has limited capabilities www.awseducate.com.
@@ -127,29 +106,3 @@ Installation of Rancher:
 16)click on create, give an appropriate namespace, name, and increase the replicas to 3. In the contained-0, give the image (with tag) that you pushed into your dockerhub.
 17)Under the Ports, select service type : Node Port, Name: nodeport, private container port: 80 and leave the rest to default. Then click on save, it will take a few seconds to get activated. 
 18)Similarly, install and deploye in the rancher of springboot instance with port:8080 and rest the same. 
-19)Below are the screenshots of the rancher instances with their active deployment. 
-Angular Pods on Rancher:
-
-
-Spring-boot pods on Rancher :
-
-
-Output Screenshots: 
-
-Home page: 
-
-
-
-Survey page:
-
-
-List all surveys: 
-
-
-Get all surveys from backend: 
-
-
-
-Mysql workbench aws rds database:
- 
-
