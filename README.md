@@ -1,5 +1,4 @@
-# Project Name
-
+# Full-Stack Prospective Student Survey System
 ## AWS RDS Database Creation
 
 ### Steps
